@@ -145,8 +145,7 @@ public class Start {
 		keyboardInput();
 		mouseInput();
 	}
-	
-	//Now start the game :)
+
 	public static void main(String[] args) {
 		new Start().start();
 	}
