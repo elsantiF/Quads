@@ -109,16 +109,17 @@ public class Start {
 	}
 	
 	public void keyboardInput(){
-		if(Keyboard.getEventKey() == Keyboard.KEY_UP){
+		boolean up = Keyboard.isKeyDown(Keyboard.KEY_UP);
+		boolean down = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
+		boolean right = Keyboard.isKeyDown(Keyboard.KEY_RIGHT);
+		boolean left = Keyboard.isKeyDown(Keyboard.KEY_LEFT);
+		if(up){
 			cam.move(1, 0);
-		}
-		if(Keyboard.getEventKey() == Keyboard.KEY_DOWN){
+		}else if(down){
 			cam.move(-1, 0);
-		}
-		if(Keyboard.getEventKey() == Keyboard.KEY_RIGHT){
+		}else if(right){
 			cam.move(0, -1);
-		}
-		if(Keyboard.getEventKey() == Keyboard.KEY_LEFT){
+		}else if(left){
 			cam.move(0, 1);
 		}
 		while (Keyboard.next()) {
