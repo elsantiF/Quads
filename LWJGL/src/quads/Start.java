@@ -105,6 +105,12 @@ public class Start {
 			int selec_x = Math.round(mouseX / World.BLOCK_SIZE); 
 			int selec_y = Math.round(mouseY / World.BLOCK_SIZE);
 			gird.setAt(selec_x, selec_y, BlockType.AIR);
+		}else if(Mouse.isButtonDown(2)){
+			int mouseX = Mouse.getX();
+			int mouseY = 512 - Mouse.getY();
+			int selec_x = Math.round(mouseX / World.BLOCK_SIZE); 
+			int selec_y = Math.round(mouseY / World.BLOCK_SIZE);
+			selection = gird.getAt(selec_x, selec_y).getType();
 		}
 	}
 	
