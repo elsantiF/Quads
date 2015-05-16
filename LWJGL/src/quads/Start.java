@@ -120,31 +120,17 @@ public class Start {
 		boolean down = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
 		boolean right = Keyboard.isKeyDown(Keyboard.KEY_RIGHT);
 		boolean left = Keyboard.isKeyDown(Keyboard.KEY_LEFT);
-		if(up){
-			cam.move(1, 0);
-		}else if(down){
-			cam.move(-1, 0);
-		}else if(right){
-			cam.move(0, -1);
-		}else if(left){
-			cam.move(0, 1);
-		}
+		if(up) cam.move(1, 0);
+		if(down) cam.move(-1, 0);
+		if(right) cam.move(0, -1);
+		if(left) cam.move(0, 1);
+		
 		while (Keyboard.next()) {
-			if(Keyboard.getEventKey() == Keyboard.KEY_L){
-				gird.load(new File("save.xml"));
-			}
-			if(Keyboard.getEventKey() == Keyboard.KEY_S){
-				gird.save(new File("save.xml"));
-			}
-			if(Keyboard.getEventKey() == Keyboard.KEY_1){
-				selection = BlockType.STONE;
-			}
-			if(Keyboard.getEventKey() == Keyboard.KEY_2){
-				selection = BlockType.DIRT;
-			}
-			if(Keyboard.getEventKey() == Keyboard.KEY_3){
-				selection = BlockType.GRASS;
-			}
+			if(Keyboard.getEventKey() == Keyboard.KEY_L) gird.load(new File("save.xml"));
+			if(Keyboard.getEventKey() == Keyboard.KEY_S) gird.save(new File("save.xml"));
+			if(Keyboard.getEventKey() == Keyboard.KEY_1) selection = BlockType.STONE;
+			if(Keyboard.getEventKey() == Keyboard.KEY_2) selection = BlockType.DIRT;
+			if(Keyboard.getEventKey() == Keyboard.KEY_3) selection = BlockType.GRASS;
 		}
 	}
 	
