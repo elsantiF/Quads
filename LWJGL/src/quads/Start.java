@@ -110,7 +110,8 @@ public class Start {
 			int mouseY = 512 - Mouse.getY();
 			int selec_x = Math.round(mouseX / World.BLOCK_SIZE); 
 			int selec_y = Math.round(mouseY / World.BLOCK_SIZE);
-			selection = gird.getAt(selec_x, selec_y).getType();
+			BlockType preselection = gird.getAt(selec_x, selec_y).getType();
+			if(preselection != BlockType.AIR) selection = gird.getAt(selec_x, selec_y).getType();
 		}
 	}
 	
