@@ -3,14 +3,14 @@ package engine;
 public class GameObject {
 
 	protected String name;
-	protected float posX;
-	protected float posY;
+	protected int posX;
+	protected int posY;
 	
 	public float getPosX() {
 		return posX;
 	}
 	
-	public void setPosX(float posX) {
+	public void setPosX(int posX) {
 		this.posX = posX;
 	}
 	
@@ -18,7 +18,7 @@ public class GameObject {
 		return posY;
 	}
 	
-	public void setPosY(float posY) {
+	public void setPosY(int posY) {
 		this.posY = posY;
 	}
 
