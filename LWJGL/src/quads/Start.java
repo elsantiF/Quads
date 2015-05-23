@@ -52,7 +52,7 @@ public class Start {
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
 			cam.use();
-			input();
+			input(delta);
 			gird.render();
 			updateFPS();
 			Display.update();
@@ -115,15 +115,15 @@ public class Start {
 		}
 	}
 	
-	public void keyboardInput(){
+	public void keyboardInput(float delta){
 		boolean up = Keyboard.isKeyDown(Keyboard.KEY_UP);
 		boolean down = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
 		boolean right = Keyboard.isKeyDown(Keyboard.KEY_RIGHT);
 		boolean left = Keyboard.isKeyDown(Keyboard.KEY_LEFT);
-		if(up) cam.move(1, 0);
-		if(down) cam.move(-1, 0);
-		if(right) cam.move(0, -1);
-		if(left) cam.move(0, 1);
+		if(up) cam.move(1 * delta, 0 * delta);
+		if(down) cam.move(-1 * delta, 0 * delta);
+		if(right) cam.move(0 * delta, -1 * delta);
+		if(left) cam.move(0 * delta, 1 * delta);
 		
 		while (Keyboard.next()) {
 			if(Keyboard.getEventKey() == Keyboard.KEY_L) gird.load(new File("save.xml"));
@@ -134,8 +134,8 @@ public class Start {
 		}
 	}
 	
-	public void input(){
-		keyboardInput();
+	public void input(float delta){
+		keyboardInput(delta);
 		mouseInput();
 	}
 
