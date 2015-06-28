@@ -2,9 +2,13 @@ package quads.blocks;
 
 import static org.lwjgl.opengl.GL11.*;
 import static quads.World.*;
+
 import java.io.File;
 import java.io.FileInputStream;
+
 import org.newdawn.slick.opengl.*;
+
+import quads.Start;
 import engine.GameObject;
 
 public class Block extends GameObject{

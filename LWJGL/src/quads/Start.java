@@ -20,8 +20,8 @@ public class Start {
 	long lastFPS;
 	long lastFrame;
 	int FPS;
-	Camera cam = new Camera();
-	BlockGird gird = new BlockGird();
+	public static Camera cam = new Camera();
+	public static BlockGird gird = new BlockGird();
 	BlockType selection = BlockType.STONE;
 	
 	//Start method
@@ -104,7 +104,7 @@ public class Start {
 			int mouseY = 512 - Mouse.getY();
 			int selec_x = Math.round(mouseX / World.BLOCK_SIZE); 
 			int selec_y = Math.round(mouseY / World.BLOCK_SIZE);
-			gird.setAt(selec_x, selec_y, BlockType.AIR);
+			gird.removeAt(selec_x, selec_y);
 		}else if(Mouse.isButtonDown(2)){
 			int mouseX = Mouse.getX();
 			int mouseY = 512 - Mouse.getY();

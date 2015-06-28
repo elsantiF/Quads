@@ -30,10 +30,11 @@ public class BlockGird {
 	}
 	
 	public void setAt(int x, int y, BlockType type){
-		if(!(y >= BLOCK_WIDTH)){
-			blockGird[x][y] = new Block(x * BLOCK_SIZE, y * BLOCK_SIZE, type);
-		}
-			
+		if(!(y >= BLOCK_WIDTH) && blockGird[x][y].getType() == BlockType.AIR) blockGird[x][y] = new Block(x * BLOCK_SIZE, y * BLOCK_SIZE, type);
+	}
+	
+	public void removeAt(int x, int y){
+		if(!(y >= BLOCK_WIDTH) && blockGird[x][y].getType() != BlockType.AIR) blockGird[x][y] = new Block(x * BLOCK_SIZE, y * BLOCK_SIZE, BlockType.AIR);	
 	}
 	
 	public Block getAt(int x, int y){
