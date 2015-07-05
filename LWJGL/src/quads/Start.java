@@ -1,5 +1,5 @@
 package quads;
-//Dev
+//dev
 import java.io.File;
 
 import org.lwjgl.LWJGLException;
