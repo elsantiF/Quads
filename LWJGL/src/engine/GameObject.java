@@ -1,6 +1,6 @@
 package engine;
 
-public class GameObject {
+public abstract class GameObject {
 
 	protected String name;
 	protected int posX;
@@ -29,5 +29,7 @@ public class GameObject {
 	public void setName(String name) {
 		this.name = name;
 	}
+
+	public abstract void render();
 	
 }

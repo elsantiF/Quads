@@ -38,4 +38,9 @@ public class Camera extends GameObject{
 	public void setScale(float scale) {
 		this.scale = scale;
 	}
+
+	@Override
+	public void render() {
+		return;
+	}
 }

@@ -64,8 +64,8 @@ public class BlockGird {
 		for(int x = 0; x < BLOCK_WIDTH; x++){
 			for(int y = 0; y < BLOCK_HEIGTH; y++){
 				Element block = new Element("block");
-				block.setAttribute("x", String.valueOf((int) (blockGird[x][y]).getX() / BLOCK_SIZE));
-				block.setAttribute("y", String.valueOf((int) (blockGird[x][y]).getY() / BLOCK_SIZE));
+				block.setAttribute("x", String.valueOf((int) (blockGird[x][y]).getPosX() / BLOCK_SIZE));
+				block.setAttribute("y", String.valueOf((int) (blockGird[x][y]).getPosY() / BLOCK_SIZE));
 				block.setAttribute("type", String.valueOf(this.getAt(x, y).getType()));
 				root.addContent(block);
 			}

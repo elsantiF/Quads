@@ -48,15 +48,7 @@ public class Block extends GameObject{
 	public BlockType getType(){
 		return type;
 	}
-	
-	public double getX(){
-		return posX;
-	}
-	
-	public double getY(){
-		return posY;
-	}
-	
+		
 	public int getID(){
 		return type.id;
 	}
