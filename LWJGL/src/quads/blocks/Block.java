@@ -31,16 +31,16 @@ public class Block extends GameObject{
 	public void render(){
 		glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
 		glPushMatrix();
-		glTranslatef(posX, posY, 0);
+		//glTranslatef(posX, posY, 0);
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0);
-		glVertex2f(0, 0);
+		glVertex2f(0 + posX, 0 + posY);
 		glTexCoord2f(1, 0);
-		glVertex2f(BLOCK_SIZE, 0);
+		glVertex2f(BLOCK_SIZE + posX, 0 + posY);
 		glTexCoord2f(1, 1);
-		glVertex2f(BLOCK_SIZE, BLOCK_SIZE);
+		glVertex2f(BLOCK_SIZE + posX, BLOCK_SIZE + posY);
 		glTexCoord2f(0, 1);
-		glVertex2f(0, BLOCK_SIZE);
+		glVertex2f(0 + posX, BLOCK_SIZE + posY);
 		glEnd();
 		glPopMatrix();
 	}

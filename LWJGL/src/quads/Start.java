@@ -10,6 +10,7 @@ import org.lwjgl.opengl.Display;
 import org.lwjgl.opengl.DisplayMode;
 
 import engine.Camera;
+import engine.util.Vector2;
 import quads.blocks.BlockGird;
 import quads.blocks.BlockType;
 import static org.lwjgl.opengl.GL11.*;
@@ -29,7 +30,7 @@ public class Start {
 		try {
 			Display.setDisplayMode(new DisplayMode(512, 512));
 			Display.setTitle("Quads - Now in Alpha!");
-			Display.setVSyncEnabled(true);
+			Display.setVSyncEnabled(false);
 			Display.create();
 		} catch (LWJGLException e) {
 			System.out.println(e);
@@ -44,7 +45,7 @@ public class Start {
 
 	//The gameLoop
 	private void gameLoop() {
-		cam.move(-256, -256);
+		cam.move(0, 0);
 		gird.generateWorld();
 		glColor4f(1f, 1f, 1f, 1f); //Cambaia Alpha
 		while(!Display.isCloseRequested()){
@@ -99,6 +100,7 @@ public class Start {
 			int selec_x = Math.round(mouseX / World.BLOCK_SIZE); 
 			int selec_y = Math.round(mouseY / World.BLOCK_SIZE);
 			gird.setAt(selec_x, selec_y, selection);
+			cam.screenToWorld(new Vector2(selec_x, selec_y));
 		}else if(Mouse.isButtonDown(1)){
 			int mouseX = Mouse.getX();
 			int mouseY = 512 - Mouse.getY();
@@ -120,10 +122,10 @@ public class Start {
 		boolean down = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
 		boolean right = Keyboard.isKeyDown(Keyboard.KEY_RIGHT);
 		boolean left = Keyboard.isKeyDown(Keyboard.KEY_LEFT);
-		if(up) cam.move(1 * delta, 0 * delta);
-		if(down) cam.move(-1 * delta, 0 * delta);
-		if(right) cam.move(0 * delta, -1 * delta);
-		if(left) cam.move(0 * delta, 1 * delta);
+		if(up) cam.move(0 * delta, -1 * delta);
+		if(down) cam.move(0 * delta, 1 * delta);
+		if(right) cam.move(-1 * delta, 0 * delta);
+		if(left) cam.move(1 * delta, 0 * delta);
 		
 		while (Keyboard.next()) {
 			if(Keyboard.getEventKey() == Keyboard.KEY_L) gird.load(new File("save.xml"));
