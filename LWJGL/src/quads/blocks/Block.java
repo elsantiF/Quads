@@ -10,15 +10,16 @@ import org.newdawn.slick.opengl.*;
 
 import quads.Start;
 import engine.GameObject;
+import engine.Renderable;
+import engine.util.Vector2;
 
-public class Block extends GameObject{
+public class Block extends GameObject implements Renderable{
 
 	private Texture texture;
 	private BlockType type;
 
 	public Block(int x, int y, BlockType type){
-		this.posX = x;
-		this.posY = y;
+		pos.set(x, y);
 		this.type = type;
 		try{
 			this.texture = TextureLoader.getTexture("PNG", new FileInputStream(new File(type.loc)));
@@ -28,19 +29,20 @@ public class Block extends GameObject{
 		}
 	}
 	
+	@Override
 	public void render(){
 		glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
 		glPushMatrix();
 		//glTranslatef(posX, posY, 0);
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0);
-		glVertex2f(0 + posX, 0 + posY);
+		glVertex2f(0 + pos.getX(), 0 + pos.getY());
 		glTexCoord2f(1, 0);
-		glVertex2f(BLOCK_SIZE + posX, 0 + posY);
+		glVertex2f(BLOCK_SIZE + pos.getX(), 0 + pos.getY());
 		glTexCoord2f(1, 1);
-		glVertex2f(BLOCK_SIZE + posX, BLOCK_SIZE + posY);
+		glVertex2f(BLOCK_SIZE + pos.getX(), BLOCK_SIZE + pos.getY());
 		glTexCoord2f(0, 1);
-		glVertex2f(0 + posX, BLOCK_SIZE + posY);
+		glVertex2f(0 + pos.getX(), BLOCK_SIZE + pos.getY());
 		glEnd();
 		glPopMatrix();
 	}

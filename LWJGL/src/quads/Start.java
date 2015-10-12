@@ -49,6 +49,8 @@ public class Start {
 		gird.generateWorld();
 		glColor4f(1f, 1f, 1f, 1f); //Cambaia Alpha
 		while(!Display.isCloseRequested()){
+			glMatrixMode(GL_MODELVIEW);
+			glLoadIdentity();
 			int delta = getDelta();
 			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 			glLoadIdentity();
@@ -90,7 +92,6 @@ public class Start {
 		glEnable(GL_BLEND);
 		glBlendFunc(GL_SRC_ALPHA, GL_ONE_MINUS_SRC_ALPHA);
 		glOrtho(0, 512, 512, 0, 1, -1);
-		glMatrixMode(GL_MODELVIEW);
 	}
 	
 	public void mouseInput(){
