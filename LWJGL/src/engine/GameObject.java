@@ -19,4 +19,6 @@ public abstract class GameObject {
 		return pos;
 	}
 	
+	public abstract void update(float delata);
+	
 }

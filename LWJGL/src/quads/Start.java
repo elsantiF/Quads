@@ -49,16 +49,9 @@ public class Start {
 		gird.generateWorld();
 		glColor4f(1f, 1f, 1f, 1f); //Cambaia Alpha
 		while(!Display.isCloseRequested()){
-			glMatrixMode(GL_MODELVIEW);
-			glLoadIdentity();
 			int delta = getDelta();
-			glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
-			glLoadIdentity();
-			cam.use();
-			input(delta);
-			gird.render();
-			updateFPS();
-			Display.update();
+			render();
+			update(delta);
 		}
 	}
 	
@@ -137,9 +130,20 @@ public class Start {
 		}
 	}
 	
-	public void input(float delta){
+	public void update(float delta){
 		keyboardInput(delta);
 		mouseInput();
+		cam.use();
+		updateFPS();
+		Display.update();
+	}
+	
+	public void render(){
+		glMatrixMode(GL_MODELVIEW);
+		glLoadIdentity();
+		glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+		glLoadIdentity();
+		gird.render();
 	}
 
 	public static void main(String[] args) {

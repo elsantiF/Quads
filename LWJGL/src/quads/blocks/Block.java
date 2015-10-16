@@ -2,16 +2,11 @@ package quads.blocks;
 
 import static org.lwjgl.opengl.GL11.*;
 import static quads.World.*;
-
 import java.io.File;
 import java.io.FileInputStream;
-
 import org.newdawn.slick.opengl.*;
-
-import quads.Start;
 import engine.GameObject;
 import engine.Renderable;
-import engine.util.Vector2;
 
 public class Block extends GameObject implements Renderable{
 
@@ -33,7 +28,6 @@ public class Block extends GameObject implements Renderable{
 	public void render(){
 		glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
 		glPushMatrix();
-		//glTranslatef(posX, posY, 0);
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0);
 		glVertex2f(0 + pos.getX(), 0 + pos.getY());
@@ -53,5 +47,10 @@ public class Block extends GameObject implements Renderable{
 		
 	public int getID(){
 		return type.id;
+	}
+
+	@Override
+	public void update(float delata) {
+
 	}
 }

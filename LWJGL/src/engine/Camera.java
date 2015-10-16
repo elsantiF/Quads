@@ -14,9 +14,7 @@ public class Camera extends GameObject{
 	}
 	
 	public void use(){
-//		glTranslatef(Display.getWidth()/2, Display.getHeight()/2, 0);
-//		glScalef(scale, scale, 0);
-//		glTranslatef(posX, posY, 0);
+		glScalef(scale, scale, 0);
 		glViewport((int)pos.getX(), (int)pos.getY(), Display.getDisplayMode().getWidth(), Display.getDisplayMode().getHeight());
 	}
 	
@@ -37,6 +35,11 @@ public class Camera extends GameObject{
 
 	public void setScale(float scale) {
 		this.scale = scale;
+	}
+	
+	@Override
+	public void update(float delata) {
+		
 	}
 	
 	//TODO Terminar
