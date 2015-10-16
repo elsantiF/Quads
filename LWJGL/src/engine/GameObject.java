@@ -1,27 +1,12 @@
 package engine;
 
-public class GameObject {
+import engine.util.Vector2;
+
+public abstract class GameObject {
 
 	protected String name;
-	protected int posX;
-	protected int posY;
+	protected Vector2 pos = new Vector2();
 	
-	public float getPosX() {
-		return posX;
-	}
-	
-	public void setPosX(int posX) {
-		this.posX = posX;
-	}
-	
-	public float getPosY() {
-		return posY;
-	}
-	
-	public void setPosY(int posY) {
-		this.posY = posY;
-	}
-
 	public String getName() {
 		return name;
 	}
@@ -29,5 +14,11 @@ public class GameObject {
 	public void setName(String name) {
 		this.name = name;
 	}
+	
+	public Vector2 getPos(){
+		return pos;
+	}
+	
+	public abstract void update(float delata);
 	
 }
