@@ -1,9 +1,8 @@
 package quads.gui;
 
-import org.lwjgl.util.vector.Vector2f;
+import engine.GameObject;
 
-
-public abstract class GuiButton {
+public abstract class GuiButton extends GameObject{
 
 	public String name;
 	public int x, y, width, height;
@@ -14,10 +13,6 @@ public abstract class GuiButton {
 		this.x = x;
 		this.y = y;
 		this.name = name;
-	}
-	
-	public Vector2f getPos(){
-		return new Vector2f(x, y);
 	}
 	
 	public boolean isIn(int mouseX, int mouseY){

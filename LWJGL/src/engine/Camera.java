@@ -1,9 +1,6 @@
 package engine;
 
 import static org.lwjgl.opengl.GL11.*;
-import org.lwjgl.opengl.Display;
-import org.lwjgl.util.vector.Vector2f;
-import engine.util.Vector2;
 
 public class Camera extends GameObject{
 
@@ -15,14 +12,14 @@ public class Camera extends GameObject{
 	
 	public void use(){
 		glScalef(scale, scale, 0);
-		glViewport((int)pos.getX(), (int)pos.getY(), Display.getDisplayMode().getWidth(), Display.getDisplayMode().getHeight());
+		//TODO: OBTENER DIMENSIONES
+		glViewport((int)pos.x, (int)pos.y, 512, 512);
 	}
 	
 	public void move(float d, float e){
 		e /= scale;
 		d /= scale;
-		pos.setX(d + pos.getX());
-		pos.setY(e + pos.getY());
+		pos.set(d + pos.x, e + pos.y);
 	}
 	
 	public void zoom(float zoom){
@@ -40,10 +37,5 @@ public class Camera extends GameObject{
 	@Override
 	public void update(float delata) {
 		
-	}
-	
-	//TODO Terminar
-	public Vector2f screenToWorld(Vector2 screen){
-		return null;
 	}
 }

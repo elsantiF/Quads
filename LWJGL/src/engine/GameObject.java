@@ -1,11 +1,11 @@
 package engine;
 
-import engine.util.Vector2;
+import engine.math.Vector2f;
 
 public abstract class GameObject {
 
 	protected String name;
-	protected Vector2 pos = new Vector2();
+	protected Vector2f pos = new Vector2f();
 	
 	public String getName() {
 		return name;
@@ -15,7 +15,7 @@ public abstract class GameObject {
 		this.name = name;
 	}
 	
-	public Vector2 getPos(){
+	public Vector2f getPos(){
 		return pos;
 	}
 	
