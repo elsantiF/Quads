@@ -50,7 +50,7 @@ public class Block extends GameObject implements Renderable{
 	}
 
 	@Override
-	public void update(float delata) {
+	public void update(float delta) {
 
 	}
 }

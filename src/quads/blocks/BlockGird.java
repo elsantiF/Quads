@@ -70,9 +70,9 @@ public class BlockGird {
 				root.addContent(block);
 			}
 		}
-		XMLOutputter ouput = new XMLOutputter();
+		XMLOutputter output = new XMLOutputter();
 		try{
-			ouput.output(document, new FileOutputStream(saveFile));
+			output.output(document, new FileOutputStream(saveFile));
 		}catch(Exception e){
 			e.printStackTrace();
 		}

@@ -11,6 +11,7 @@ import org.lwjgl.opengl.DisplayMode;
 
 import engine.Camera;
 import engine.util.Vector2;
+import org.lwjgl.util.vector.Vector2f;
 import quads.blocks.BlockGird;
 import quads.blocks.BlockType;
 import static org.lwjgl.opengl.GL11.*;
@@ -91,22 +92,22 @@ public class Start {
 		if(Mouse.isButtonDown(0)){
 			int mouseX = Mouse.getX();
 			int mouseY = 512 - Mouse.getY();
-			int selec_x = Math.round(mouseX / World.BLOCK_SIZE); 
-			int selec_y = Math.round(mouseY / World.BLOCK_SIZE);
-			gird.setAt(selec_x, selec_y, selection);
-			cam.screenToWorld(new Vector2(selec_x, selec_y));
+			Vector2f pos = cam.screenToWorld(new Vector2(mouseX, mouseY));
+			int select_x = Math.round(pos.x / World.BLOCK_SIZE);
+			int select_y = Math.round(pos.y / World.BLOCK_SIZE);
+			gird.setAt(select_x, select_y, selection);
 		}else if(Mouse.isButtonDown(1)){
 			int mouseX = Mouse.getX();
 			int mouseY = 512 - Mouse.getY();
-			int selec_x = Math.round(mouseX / World.BLOCK_SIZE); 
-			int selec_y = Math.round(mouseY / World.BLOCK_SIZE);
-			gird.removeAt(selec_x, selec_y);
+			int select_x = Math.round(mouseX / World.BLOCK_SIZE);
+			int select_y = Math.round(mouseY / World.BLOCK_SIZE);
+			gird.removeAt(select_x, select_y);
 		}else if(Mouse.isButtonDown(2)){
 			int mouseX = Mouse.getX();
 			int mouseY = 512 - Mouse.getY();
-			int selec_x = Math.round(mouseX / World.BLOCK_SIZE); 
-			int selec_y = Math.round(mouseY / World.BLOCK_SIZE);
-			BlockType preselection = gird.getAt(selec_x, selec_y).getType();
+			int select_x = Math.round(mouseX / World.BLOCK_SIZE);
+			int select_y = Math.round(mouseY / World.BLOCK_SIZE);
+			BlockType preselection = gird.getAt(select_x, select_y).getType();
 			if(preselection != BlockType.AIR) selection = preselection;
 		}
 	}
