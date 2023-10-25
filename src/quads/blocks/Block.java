@@ -4,7 +4,6 @@ import static org.lwjgl.opengl.GL11.*;
 import static quads.World.*;
 import java.io.File;
 import java.io.FileInputStream;
-import org.newdawn.slick.opengl.*;
 import engine.GameObject;
 import engine.Renderable;
 
