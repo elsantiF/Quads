@@ -2,8 +2,15 @@ package quads;
 
 import engine.Camera;
 import engine.util.Vector2;
+
+import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
+import static org.lwjgl.glfw.GLFW.*;
+import org.lwjgl.glfw.GLFWErrorCallback;
+import org.lwjgl.opengl.GL;
 import quads.blocks.BlockGird;
 import quads.blocks.BlockType;
+import static org.lwjgl.system.MemoryStack.*;
+import static org.lwjgl.system.MemoryUtil.*;
 
 import java.io.File;
 
@@ -18,6 +25,7 @@ public class Start {
     long lastFrame;
     int FPS;
     BlockType selection = BlockType.STONE;
+    private long window;
 
     public static void main(String[] args) {
         new Start().start();
@@ -25,20 +33,34 @@ public class Start {
 
     //Start method
     private void start() {
-        try {
-            Display.setDisplayMode(new DisplayMode(512, 512));
-            Display.setTitle("Quads - Now in Alpha!");
-            Display.setVSyncEnabled(false);
-            Display.create();
-        } catch (LWJGLException e) {
-            System.out.println(e);
-            Display.destroy();
-            System.exit(0);
+        GLFWErrorCallback.createPrint(System.err).set();
+
+        if(!glfwInit()) {
+            throw new RuntimeException("Can't initialize GLFW");
         }
+
+        glfwDefaultWindowHints();
+        glfwWindowHint(GLFW_VISIBLE, GLFW_FALSE);
+
+        window = glfwCreateWindow(512, 512, "Quads", NULL, NULL);
+        if(window == NULL) {
+            throw new RuntimeException("Can't create window");
+        }
+
+        glfwMakeContextCurrent(window);
+        glfwSwapInterval(1);
+        glfwShowWindow(window);
+
         initGL();
         getDelta();
         lastFPS = getTime();
         gameLoop();
+
+        glfwFreeCallbacks(window);
+        glfwDestroyWindow(window);
+
+        glfwTerminate();
+        glfwSetErrorCallback(null).free();
     }
 
     //The gameLoop
@@ -46,7 +68,7 @@ public class Start {
         cam.move(0, 0);
         gird.generateWorld();
         glColor4f(1f, 1f, 1f, 1f); //Cambaia Alpha
-        while (!Display.isCloseRequested()) {
+        while (!glfwWindowShouldClose(window)) {
             int delta = getDelta();
             render();
             update(delta);
@@ -62,13 +84,13 @@ public class Start {
     }
 
     public long getTime() {
-        return (Sys.getTime() * 1000) / Sys.getTimerResolution();
+        return System.currentTimeMillis() * 1000;
     }
     //And finish here
 
     private void updateFPS() {
         if (getTime() - lastFPS > 1000) {
-            Display.setTitle("FPS: " + FPS);
+            // Display.setTitle("FPS: " + FPS);
             FPS = 0;
             lastFPS += 1000;
         }
@@ -77,6 +99,7 @@ public class Start {
 
     //More methods
     private void initGL() {
+        GL.createCapabilities();
         glMatrixMode(GL_PROJECTION);
         glLoadIdentity();
         glEnable(GL_TEXTURE_2D);
@@ -86,7 +109,8 @@ public class Start {
     }
 
     public void mouseInput() {
-        if (Mouse.isButtonDown(0)) {
+        //TODO: Mouse input
+        /*if (Mouse.isButtonDown(0)) {
             int mouseX = Mouse.getX();
             int mouseY = 512 - Mouse.getY();
             Vector2f pos = cam.screenToWorld(new Vector2(mouseX, mouseY));
@@ -106,11 +130,12 @@ public class Start {
             int select_y = Math.round(mouseY / World.BLOCK_SIZE);
             BlockType preselection = gird.getAt(select_x, select_y).getType();
             if (preselection != BlockType.AIR) selection = preselection;
-        }
+        }*/
     }
 
     public void keyboardInput(float delta) {
-        boolean up = Keyboard.isKeyDown(Keyboard.KEY_UP);
+        //TODO: Keyboard input
+        /*boolean up = Keyboard.isKeyDown(Keyboard.KEY_UP);
         boolean down = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
         boolean right = Keyboard.isKeyDown(Keyboard.KEY_RIGHT);
         boolean left = Keyboard.isKeyDown(Keyboard.KEY_LEFT);
@@ -125,7 +150,7 @@ public class Start {
             if (Keyboard.getEventKey() == Keyboard.KEY_1) selection = BlockType.STONE;
             if (Keyboard.getEventKey() == Keyboard.KEY_2) selection = BlockType.DIRT;
             if (Keyboard.getEventKey() == Keyboard.KEY_3) selection = BlockType.GRASS;
-        }
+        }*/
     }
 
     public void update(float delta) {
@@ -133,7 +158,7 @@ public class Start {
         mouseInput();
         cam.use();
         updateFPS();
-        Display.update();
+        glfwPollEvents();
     }
 
     public void render() {
@@ -142,5 +167,6 @@ public class Start {
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glLoadIdentity();
         gird.render();
+        glfwSwapBuffers(window);
     }
 }

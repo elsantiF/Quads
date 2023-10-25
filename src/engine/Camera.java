@@ -18,7 +18,7 @@ public class Camera extends GameObject {
 
     public void use() {
         glScalef(scale, scale, 0);
-        glViewport((int) pos.getX(), (int) pos.getY(), Display.getDisplayMode().getWidth(), Display.getDisplayMode().getHeight());
+        glViewport((int) pos.getX(), (int) pos.getY(), 512, 512);
     }
 
     public void move(float d, float e) {
@@ -47,7 +47,8 @@ public class Camera extends GameObject {
 
     //TODO Terminar
     public Vector2 screenToWorld(Vector2 screen) {
-        FloatBuffer model = BufferUtils.createFloatBuffer(16);
+        //TODO: Screen to world coordinates transform
+        /*FloatBuffer model = BufferUtils.createFloatBuffer(16);
         FloatBuffer projection = BufferUtils.createFloatBuffer(16);
         IntBuffer viewport = BufferUtils.createIntBuffer(16);
 
@@ -60,7 +61,7 @@ public class Camera extends GameObject {
 
         FloatBuffer coord = BufferUtils.createFloatBuffer(16);
 
-        GLU.gluUnProject(screen.x, y, -1.5f, model, projection, viewport, coord);
-        return new Vector2(coord.get(0), coord.get(1));
+        GLU.gluUnProject(screen.x, y, -1.5f, model, projection, viewport, coord);*/
+        return screen;
     }
 }

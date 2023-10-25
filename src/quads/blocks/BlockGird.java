@@ -40,7 +40,8 @@ public class BlockGird {
     }
 
     public void load(File loadFile) {
-        try {
+        //TODO: New load
+        /*try {
             SAXBuilder builder = new SAXBuilder();
             Document document = builder.build(loadFile);
             Element root = document.getRootElement();
@@ -52,11 +53,12 @@ public class BlockGird {
             }
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
     public void save(File saveFile) {
-        Document document = new Document();
+        //TODO: New save
+        /*Document document = new Document();
         Element root = new Element("block");
         document.setRootElement(root);
         for (int x = 0; x < BLOCK_WIDTH; x++) {
@@ -73,7 +75,7 @@ public class BlockGird {
             output.output(document, new FileOutputStream(saveFile));
         } catch (Exception e) {
             e.printStackTrace();
-        }
+        }*/
     }
 
 }

@@ -9,23 +9,22 @@ import engine.Renderable;
 
 public class Block extends GameObject implements Renderable{
 
-	private Texture texture;
 	private BlockType type;
 
 	public Block(int x, int y, BlockType type){
 		pos.set(x, y);
 		this.type = type;
-		try{
+		/*try{
 			this.texture = TextureLoader.getTexture("PNG", new FileInputStream(new File(type.loc)));
 		}catch(Exception e){
 			System.out.println(e);
 			System.exit(0);
-		}
+		}*/
 	}
 	
 	@Override
 	public void render(){
-		glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
+		//glBindTexture(GL_TEXTURE_2D, texture.getTextureID());
 		glPushMatrix();
 		glBegin(GL_QUADS);
 		glTexCoord2f(0, 0);
