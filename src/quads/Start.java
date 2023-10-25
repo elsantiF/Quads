@@ -13,6 +13,7 @@ import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
 import java.io.File;
+import java.nio.DoubleBuffer;
 
 import static org.lwjgl.opengl.GL11.*;
 
@@ -50,6 +51,7 @@ public class Start {
         glfwMakeContextCurrent(window);
         glfwSwapInterval(1);
         glfwShowWindow(window);
+        glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
         initGL();
         getDelta();
@@ -109,28 +111,29 @@ public class Start {
     }
 
     public void mouseInput() {
-        //TODO: Mouse input
-        /*if (Mouse.isButtonDown(0)) {
-            int mouseX = Mouse.getX();
-            int mouseY = 512 - Mouse.getY();
-            Vector2f pos = cam.screenToWorld(new Vector2(mouseX, mouseY));
-            int select_x = Math.round(pos.x / World.BLOCK_SIZE);
-            int select_y = Math.round(pos.y / World.BLOCK_SIZE);
+        int stateLeft = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
+        int stateRight = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
+        int stateMiddle = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE);
+
+        DoubleBuffer mouseX = stackGet().mallocDouble(1);
+        DoubleBuffer mouseY = stackGet().mallocDouble(1);
+        glfwGetCursorPos(window, mouseX, mouseY);
+        int select_x = (int) Math.round(mouseX.get() / World.BLOCK_SIZE);
+        int select_y = (int) Math.round(mouseY.get() / World.BLOCK_SIZE);
+
+        select_x = Math.min(Math.max(select_x, 0), World.BLOCK_HEIGTH - 1);
+        select_y = Math.min(Math.max(select_y, 0), World.BLOCK_WIDTH);
+        //Vector2f pos = cam.screenToWorld(new Vector2(mouseX, mouseY));
+        if (stateLeft == GLFW_PRESS) {
             gird.setAt(select_x, select_y, selection);
-        } else if (Mouse.isButtonDown(1)) {
-            int mouseX = Mouse.getX();
-            int mouseY = 512 - Mouse.getY();
-            int select_x = Math.round(mouseX / World.BLOCK_SIZE);
-            int select_y = Math.round(mouseY / World.BLOCK_SIZE);
+        }
+        if (stateRight == GLFW_PRESS) {
             gird.removeAt(select_x, select_y);
-        } else if (Mouse.isButtonDown(2)) {
-            int mouseX = Mouse.getX();
-            int mouseY = 512 - Mouse.getY();
-            int select_x = Math.round(mouseX / World.BLOCK_SIZE);
-            int select_y = Math.round(mouseY / World.BLOCK_SIZE);
+        }
+        if (stateMiddle == GLFW_PRESS) {
             BlockType preselection = gird.getAt(select_x, select_y).getType();
             if (preselection != BlockType.AIR) selection = preselection;
-        }*/
+        }
     }
 
     public void keyboardInput(float delta) {
@@ -142,15 +145,13 @@ public class Start {
         if (up) cam.move(0 * delta, -1 * delta);
         if (down) cam.move(0 * delta, 1 * delta);
         if (right) cam.move(-1 * delta, 0 * delta);
-        if (left) cam.move(1 * delta, 0 * delta);
+        if (left) cam.move(1 * delta, 0 * delta);*/
 
-        while (Keyboard.next()) {
-            if (Keyboard.getEventKey() == Keyboard.KEY_L) gird.load(new File("save.xml"));
-            if (Keyboard.getEventKey() == Keyboard.KEY_S) gird.save(new File("save.xml"));
-            if (Keyboard.getEventKey() == Keyboard.KEY_1) selection = BlockType.STONE;
-            if (Keyboard.getEventKey() == Keyboard.KEY_2) selection = BlockType.DIRT;
-            if (Keyboard.getEventKey() == Keyboard.KEY_3) selection = BlockType.GRASS;
-        }*/
+        /*if (Keyboard.getEventKey() == Keyboard.KEY_L) gird.load(new File("save.xml"));
+        if (Keyboard.getEventKey() == Keyboard.KEY_S) gird.save(new File("save.xml"));*/
+        if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) selection = BlockType.STONE;
+        if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) selection = BlockType.DIRT;
+        if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) selection = BlockType.GRASS;
     }
 
     public void update(float delta) {
