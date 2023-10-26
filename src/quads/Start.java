@@ -118,11 +118,9 @@ public class Start {
         DoubleBuffer mouseX = stackGet().mallocDouble(1);
         DoubleBuffer mouseY = stackGet().mallocDouble(1);
         glfwGetCursorPos(window, mouseX, mouseY);
-        int select_x = (int) Math.round(mouseX.get() / World.BLOCK_SIZE);
-        int select_y = (int) Math.round(mouseY.get() / World.BLOCK_SIZE);
+        int select_x = (int) Math.floor(mouseX.get() / World.BLOCK_SIZE);
+        int select_y = (int) Math.floor(mouseY.get() / World.BLOCK_SIZE);
 
-        select_x = Math.min(Math.max(select_x, 0), World.BLOCK_HEIGTH - 1);
-        select_y = Math.min(Math.max(select_y, 0), World.BLOCK_WIDTH);
         //Vector2f pos = cam.screenToWorld(new Vector2(mouseX, mouseY));
         if (stateLeft == GLFW_PRESS) {
             gird.setAt(select_x, select_y, selection);
