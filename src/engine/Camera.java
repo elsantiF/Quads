@@ -1,31 +1,29 @@
 package engine;
 
-import engine.util.Vector2;
-import org.lwjgl.BufferUtils;
-
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
+import org.joml.Vector2f;
 
 import static org.lwjgl.opengl.GL11.*;
 
-public class Camera extends GameObject {
+public class Camera {
 
+    private Vector2f pos;
     private float scale;
 
     public Camera() {
+        pos = new Vector2f();
         scale = 1;
     }
 
     public void use() {
         glScalef(scale, scale, 0);
-        glViewport((int) pos.getX(), (int) pos.getY(), 512, 512);
+        glViewport((int) pos.x, (int) pos.y, 512, 512);
     }
 
     public void move(float d, float e) {
         e /= scale;
         d /= scale;
-        pos.setX(d + pos.getX());
-        pos.setY(e + pos.getY());
+        pos.x = (d + pos.x);
+        pos.y = (e + pos.y);
     }
 
     public void zoom(float zoom) {
@@ -40,13 +38,8 @@ public class Camera extends GameObject {
         this.scale = scale;
     }
 
-    @Override
-    public void update(float delata) {
-
-    }
-
     //TODO Terminar
-    public Vector2 screenToWorld(Vector2 screen) {
+    public Vector2f screenToWorld(Vector2f screen) {
         //TODO: Screen to world coordinates transform
         /*FloatBuffer model = BufferUtils.createFloatBuffer(16);
         FloatBuffer projection = BufferUtils.createFloatBuffer(16);

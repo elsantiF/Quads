@@ -1,7 +1,6 @@
 package quads;
 
 import engine.Camera;
-import engine.util.Vector2;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
@@ -12,7 +11,6 @@ import quads.blocks.BlockType;
 import static org.lwjgl.system.MemoryStack.*;
 import static org.lwjgl.system.MemoryUtil.*;
 
-import java.io.File;
 import java.nio.DoubleBuffer;
 
 import static org.lwjgl.opengl.GL11.*;

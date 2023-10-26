@@ -1,5 +1,6 @@
 /out/
 save.xml
+save
 Quads.iml
 /.idea
 # Ignore Gradle project-specific cache directory
