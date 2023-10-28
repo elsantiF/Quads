@@ -4,6 +4,8 @@ import engine.Camera;
 
 import static org.lwjgl.glfw.Callbacks.glfwFreeCallbacks;
 import static org.lwjgl.glfw.GLFW.*;
+
+import engine.Input;
 import org.lwjgl.glfw.GLFWErrorCallback;
 import org.lwjgl.opengl.GL;
 import quads.blocks.BlockGird;
@@ -25,6 +27,8 @@ public class Start {
     int FPS;
     BlockType selection = BlockType.STONE;
     private long window;
+
+    private Input input;
 
     public static void main(String[] args) {
         new Start().start();
@@ -51,6 +55,7 @@ public class Start {
         glfwShowWindow(window);
         glfwSetInputMode(window, GLFW_STICKY_KEYS, GLFW_TRUE);
 
+        input = new Input(window);
         initGL();
         getDelta();
         lastFPS = getTime();
@@ -84,13 +89,13 @@ public class Start {
     }
 
     public long getTime() {
-        return System.currentTimeMillis() * 1000;
+        return System.currentTimeMillis();
     }
     //And finish here
 
     private void updateFPS() {
         if (getTime() - lastFPS > 1000) {
-            // Display.setTitle("FPS: " + FPS);
+            glfwSetWindowTitle(window, "Quads - " + FPS);
             FPS = 0;
             lastFPS += 1000;
         }
@@ -109,31 +114,23 @@ public class Start {
     }
 
     public void mouseInput() {
-        int stateLeft = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_LEFT);
-        int stateRight = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_RIGHT);
-        int stateMiddle = glfwGetMouseButton(window, GLFW_MOUSE_BUTTON_MIDDLE);
-
-        DoubleBuffer mouseX = stackGet().mallocDouble(1);
-        DoubleBuffer mouseY = stackGet().mallocDouble(1);
-        glfwGetCursorPos(window, mouseX, mouseY);
-        int select_x = (int) Math.floor(mouseX.get() / World.BLOCK_SIZE);
-        int select_y = (int) Math.floor(mouseY.get() / World.BLOCK_SIZE);
+        int select_x = (int) Math.floor(input.getMousePosX() / World.BLOCK_SIZE);
+        int select_y = (int) Math.floor(input.getMousePosY() / World.BLOCK_SIZE);
 
         //Vector2f pos = cam.screenToWorld(new Vector2(mouseX, mouseY));
-        if (stateLeft == GLFW_PRESS) {
+        if (input.isButtonPressed(GLFW_MOUSE_BUTTON_LEFT)) {
             gird.setAt(select_x, select_y, selection);
         }
-        if (stateRight == GLFW_PRESS) {
+        if (input.isButtonPressed(GLFW_MOUSE_BUTTON_RIGHT)) {
             gird.removeAt(select_x, select_y);
         }
-        if (stateMiddle == GLFW_PRESS) {
+        if (input.isButtonPressed(GLFW_MOUSE_BUTTON_MIDDLE)) {
             BlockType preselection = gird.getAt(select_x, select_y).getType();
             if (preselection != BlockType.AIR) selection = preselection;
         }
     }
 
     public void keyboardInput(float delta) {
-        //TODO: Keyboard input
         /*boolean up = Keyboard.isKeyDown(Keyboard.KEY_UP);
         boolean down = Keyboard.isKeyDown(Keyboard.KEY_DOWN);
         boolean right = Keyboard.isKeyDown(Keyboard.KEY_RIGHT);
@@ -145,9 +142,9 @@ public class Start {
 
         /*if (Keyboard.getEventKey() == Keyboard.KEY_L) gird.load(new File("save.xml"));
         if (Keyboard.getEventKey() == Keyboard.KEY_S) gird.save(new File("save.xml"));*/
-        if (glfwGetKey(window, GLFW_KEY_1) == GLFW_PRESS) selection = BlockType.STONE;
-        if (glfwGetKey(window, GLFW_KEY_2) == GLFW_PRESS) selection = BlockType.DIRT;
-        if (glfwGetKey(window, GLFW_KEY_3) == GLFW_PRESS) selection = BlockType.GRASS;
+        if (input.isKeyPressed(GLFW_KEY_1)) selection = BlockType.STONE;
+        if (input.isKeyPressed(GLFW_KEY_2)) selection = BlockType.DIRT;
+        if (input.isKeyPressed(GLFW_KEY_3)) selection = BlockType.GRASS;
     }
 
     public void update(float delta) {
